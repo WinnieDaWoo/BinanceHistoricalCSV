@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """Binance to CSV.
 
 This module was created to pull historical data from Bininace, particularaly as a training set
@@ -133,7 +132,7 @@ if __name__ == '__main__':
         data = get_bars(trading_pair, interval)
         if not os.path.exists(directory):
             os.makedirs(directory)
-        data.to_csv(directory+"/"+trading_pair+".csv", sep='\t', encoding='utf-8')
+        data.to_csv(directory+"/"+interval+trading_pair+".csv", sep='\t', encoding='utf-8')
 
         plot = data['c'].astype('float').plot(figsize=(16, 9))
         plt.xlabel("Time: " + interval)
@@ -141,7 +140,7 @@ if __name__ == '__main__':
         plot.xaxis.set_major_locator(months)
         plot.xaxis.set_minor_locator(days)
         plot.grid(True)
-        plt.savefig(directory+"/"+trading_pair+'.png')
+        plt.savefig(directory+"/"+interval+trading_pair+'.png')
     
     except KeyboardInterrupt:
         sys.exit()

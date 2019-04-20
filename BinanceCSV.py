@@ -20,6 +20,7 @@ Todo:
 """
 
 import sys
+import os
 import pytz
 import dateparser
 import time
@@ -128,8 +129,11 @@ if __name__ == '__main__':
         days = mdates.DayLocator()
         trading_pair = 'BNBUSDT'
         interval = '4h'
+        directory = "./Data/"+trading_pair
         data = get_bars(trading_pair, interval)
-        data.to_csv("./exchange data/"+trading_pair+".csv", sep='\t', encoding='utf-8')
+        if not os.path.exists(directory):
+            os.makedirs(directory)
+        data.to_csv(directory+"/"+trading_pair+".csv", sep='\t', encoding='utf-8')
 
         plot = data['c'].astype('float').plot(figsize=(16, 9))
         plt.xlabel("Time: " + interval)
@@ -137,7 +141,7 @@ if __name__ == '__main__':
         plot.xaxis.set_major_locator(months)
         plot.xaxis.set_minor_locator(days)
         plot.grid(True)
-        plt.savefig("./exchange data/"+trading_pair+'.png')
+        plt.savefig(directory+"/"+trading_pair+'.png')
     
     except KeyboardInterrupt:
         sys.exit()

@@ -15,7 +15,7 @@ Attributes:
 
 Todo:
     * Clean up plotting
-    * UI?
+    * validation and error handling
 
 """
 
